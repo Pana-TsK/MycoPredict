@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/panag/OneDrive/Documents/coding/Projects/AIbiotics/mycobacteria_ml_project/mlruns/703041421271211453/eb1af061a141404cbb116c6323ae0e54/artifacts
+end_time: 1738861161605
+entry_point_name: ''
+experiment_id: '703041421271211453'
+lifecycle_stage: active
+run_id: eb1af061a141404cbb116c6323ae0e54
+run_name: persistent-hawk-208
+run_uuid: eb1af061a141404cbb116c6323ae0e54
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738860628670
+status: 3
+tags: []
+user_id: panag

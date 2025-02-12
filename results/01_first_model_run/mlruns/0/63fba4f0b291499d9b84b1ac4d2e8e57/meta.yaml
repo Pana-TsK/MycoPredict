@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/panag/OneDrive/Documents/coding/Projects/AIbiotics/mycobacteria_ml_project/mlruns/0/63fba4f0b291499d9b84b1ac4d2e8e57/artifacts
+end_time: 1738791679881
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 63fba4f0b291499d9b84b1ac4d2e8e57
+run_name: likeable-shrike-820
+run_uuid: 63fba4f0b291499d9b84b1ac4d2e8e57
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738791679782
+status: 3
+tags: []
+user_id: panag

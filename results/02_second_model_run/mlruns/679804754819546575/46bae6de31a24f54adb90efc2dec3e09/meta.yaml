@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/panag/OneDrive/Documents/coding/Projects/AIbiotics/mycobacteria_ml_project/mlruns/679804754819546575/46bae6de31a24f54adb90efc2dec3e09/artifacts
+end_time: 1738858187872
+entry_point_name: ''
+experiment_id: '679804754819546575'
+lifecycle_stage: active
+run_id: 46bae6de31a24f54adb90efc2dec3e09
+run_name: mysterious-croc-344
+run_uuid: 46bae6de31a24f54adb90efc2dec3e09
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738856974084
+status: 3
+tags: []
+user_id: panag

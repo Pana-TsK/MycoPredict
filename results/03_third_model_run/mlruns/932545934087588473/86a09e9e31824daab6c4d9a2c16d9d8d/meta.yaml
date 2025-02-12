@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/panag/OneDrive/Documents/coding/Projects/AIbiotics/mycobacteria_ml_project/mlruns/932545934087588473/86a09e9e31824daab6c4d9a2c16d9d8d/artifacts
+end_time: 1738860225394
+entry_point_name: ''
+experiment_id: '932545934087588473'
+lifecycle_stage: active
+run_id: 86a09e9e31824daab6c4d9a2c16d9d8d
+run_name: resilient-shark-164
+run_uuid: 86a09e9e31824daab6c4d9a2c16d9d8d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738860172540
+status: 3
+tags: []
+user_id: panag
