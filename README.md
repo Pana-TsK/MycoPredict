@@ -34,8 +34,8 @@ This project was developed to showcase my skills in cheminformatics, machine lea
 - Target-Blind Nature: While useful for phenotypic screening, the model does not provide mechanistic insights into drug-target interactions.
 
 # Future Work
-- Expand the dataset to include more diverse compounds and activity labels.
-- Experiment with advanced machine learning architectures (e.g., graph neural networks).
+- Building in ensemble methods to combine predictions from multiple models such as gradient boosting, random forest
+- Building in transfer and active learning to improve model performance
 - Perform external validation using independent datasets.
 - Develop a user-friendly web interface for predicting anti-mycobacterial activity.
 
