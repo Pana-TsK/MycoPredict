@@ -3,12 +3,13 @@ from pathlib import Path
 from lightning import pytorch as pl
 import chemprop
 from chemprop import data, featurizers, models, nn
+from chemprop.nn.agg import NormAggregation
 import torch
 import mlflow
 import mlflow.pytorch
 
 # Specify input for the model
-input_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\AIbiotics\mycobacteria_ml_project\training_data\descriptors\05_descriptors.csv"
+input_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\descriptors\05_descriptors.csv"
 num_workers = 0  # Number of workers for dataloader (0 uses the main process). I keep getting recommended to increase the number of workers, but this causes issues.
 smiles_column = 'SMILES'  # Name of the column containing SMILES strings
 target_columns = ['Hit_Miss']  # Binary classification labels (0 or 1)
@@ -41,7 +42,7 @@ test_loader = data.build_dataloader(test_dset, batch_size=batch_size, num_worker
 
 # Define model components with increased capacity
 mp = nn.AtomMessagePassing()
-agg = nn.MeanAggregation()
+agg = nn.NormAggregation()
 ffn = nn.BinaryClassificationFFN(dropout=0.5)
 batch_norm = True
 metric_list = [
