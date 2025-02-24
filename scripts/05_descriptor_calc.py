@@ -25,48 +25,19 @@ class Compound:
 
 class DescriptorCalculator:
     descriptor_names = [
-        # Global Physicochemical Properties
-        "MolLogP", "TPSA", "FractionCSP3", "HeavyAtomMolWt", "LabuteASA", "HallKierAlpha",
-
-        # Structural and Topological Descriptors
-        "BertzCT", "Chi0n", "Chi4n", "NumAromaticRings", "NumAliphaticRings", 
-        "NumRotatableBonds", "NumHeteroatoms",
-
-        # Hydrogen Bonding and Polarity
-        "NumHDonors", "NumHAcceptors", "EState_VSA3",
-
-        # 3D Descriptors
-        "RadiusOfGyration", "PMI1", "PMI2", "PMI3", "InertialShapeFactor", 
-        "Asphericity", "SpherocityIndex",
-
-        # Target-Specific Descriptors
-        # These are currently not being calculated, but could be added in later with custom methods
-        "NumHalogens", "NumElectronWithdrawingGroups", "NumElectronDonatingGroups", 
-        "Redox_Potential"
+        # Physicochemical Properties
+        "LogD_pH7.4", "TPSA", "MolecularWeight", "NumRotatableBonds",
+        
+        # Electronic Properties
+        "DipoleMoment", "HOMO_LUMO_Gap", "PartialAtomicCharges",
+        
+        # Permeability-Specific Features
+        "EccentricConnectivityIndex", "Fraction_sp3_Carbons", "MolecularRigidityScore",
+        
+        # ADMET & Pharmacokinetics
+        "CYP_Inhibition", "PlasmaProteinBinding"
     ]
 
-    @staticmethod
-    def generate_3d_conformer(mol):
-        """Generates and optimizes a 3D conformer for a molecule."""
-        mol = Chem.AddHs(mol)  # Add hydrogens for accurate 3D geometry
-        AllChem.EmbedMolecule(mol)  # Generate 3D conformer
-        AllChem.MMFFOptimizeMolecule(mol)  # Optimize geometry
-        return mol
-
-    @staticmethod
-    def calculate_3d_descriptors(mol):
-        """Calculates 3D descriptors for a molecule."""
-        return {
-            "RadiusOfGyration": Descriptors3D.RadiusOfGyration(mol),
-            "PMI1": Descriptors3D.PMI1(mol),
-            "PMI2": Descriptors3D.PMI2(mol),
-            "PMI3": Descriptors3D.PMI3(mol),
-            "InertialShapeFactor": Descriptors3D.InertialShapeFactor(mol),
-            "Asphericity": Descriptors3D.Asphericity(mol),
-            "SpherocityIndex": Descriptors3D.SpherocityIndex(mol),
-        }
-
-    @staticmethod
     def calculate_descriptors(compound):
         """Dynamically calculates all descriptors (2D and 3D) for a given compound."""
         mol = Chem.MolFromSmiles(compound.smiles)
@@ -118,7 +89,7 @@ class Dataset:
 # Example usage
 if __name__ == "__main__":
     # Path to your CSV file
-    csv_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\AIbiotics\mycobacteria_ml_project\training_data\training_dataset\training_dataset.csv"
+    csv_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\training_dataset\training_dataset.csv"
     smiles_col = "canonical_smiles"  # Column name for SMILES strings
     hit_miss_col = "class"  # Column name for hit/miss labels
 
@@ -128,10 +99,11 @@ if __name__ == "__main__":
 
     # Calculate descriptors
     dataset.calculate_descriptors()
+    # The ability to add 3d descriptors was added, but the function is not called
 
     # Convert to DataFrame
     df = dataset.to_dataframe()
     print(df.head())
 
     # Save to descriptors file:
-    df.to_csv(r"C:\Users\panag\OneDrive\Documents\coding\Projects\AIbiotics\mycobacteria_ml_project\training_data\descriptors\05_descriptors.csv", index=False)
+    df.to_csv(r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\descriptors\05_descriptors_V2.csv", index=False)
