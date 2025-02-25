@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/panag/OneDrive/Documents/coding/Projects/MycoPredict/mlruns/438633058360495807/e56d439d060e4ddd90dffb56fff12273/artifacts
+end_time: 1740480451190
+entry_point_name: ''
+experiment_id: '438633058360495807'
+lifecycle_stage: active
+run_id: e56d439d060e4ddd90dffb56fff12273
+run_name: enchanting-yak-630
+run_uuid: e56d439d060e4ddd90dffb56fff12273
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740479928560
+status: 3
+tags: []
+user_id: panag

@@ -9,7 +9,7 @@ import mlflow
 import mlflow.pytorch
 
 # Specify input for the model
-input_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\descriptors\05_descriptors.csv"
+input_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\descriptors\05_descriptors_V2.csv"
 num_workers = 0  # Number of workers for dataloader (0 uses the main process). I keep getting recommended to increase the number of workers, but this causes issues.
 smiles_column = 'SMILES'  # Name of the column containing SMILES strings
 target_columns = ['Hit_Miss']  # Binary classification labels (0 or 1)
@@ -73,7 +73,7 @@ checkpoint_cb = pl.callbacks.ModelCheckpoint(
 
 # Define PyTorch Lightning trainer
 trainer = pl.Trainer(
-    logger=pl.loggers.MLFlowLogger(experiment_name="MPNN_Training"),
+    logger=pl.loggers.MLFlowLogger(experiment_name="training_version_2"),
     callbacks=[checkpoint_cb],
     enable_checkpointing=True,
     enable_progress_bar=True,
@@ -83,8 +83,7 @@ trainer = pl.Trainer(
     min_epochs=10,
     log_every_n_steps=1,
     precision="16-mixed",
-    deterministic=True,
-    gradient_clip_val=1.0,
+    deterministic=True
 )
 
 # Train the model
@@ -101,4 +100,4 @@ for metric, value in results[0].items():
     mlflow.log_metric(metric, value)
 
 # Save the best model to MLflow
-mlflow.pytorch.log_model(best_model, "mpnn_model")
+mlflow.pytorch.log_model(best_model, r"mlruns_2\best_model")

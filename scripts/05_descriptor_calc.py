@@ -25,18 +25,11 @@ class Compound:
 
 class DescriptorCalculator:
     descriptor_names = [
-        # Physicochemical Properties
-        "LogD_pH7.4", "TPSA", "MolecularWeight", "NumRotatableBonds",
-        
-        # Electronic Properties
-        "DipoleMoment", "HOMO_LUMO_Gap", "PartialAtomicCharges",
-        
-        # Permeability-Specific Features
-        "EccentricConnectivityIndex", "Fraction_sp3_Carbons", "MolecularRigidityScore",
-        
-        # ADMET & Pharmacokinetics
-        "CYP_Inhibition", "PlasmaProteinBinding"
-    ]
+    "MolLogP", "TPSA", "MolWt", "NumRotatableBonds",
+    "HallKierAlpha",
+    "FractionCSP3", "RingCount",
+    "NumHDonors", "NumHAcceptors"
+]
 
     def calculate_descriptors(compound):
         """Dynamically calculates all descriptors (2D and 3D) for a given compound."""
@@ -44,14 +37,8 @@ class DescriptorCalculator:
         if mol:
             # Calculate 2D descriptors
             descriptors_2d = {name: getattr(Descriptors, name)(mol) for name in DescriptorCalculator.descriptor_names if hasattr(Descriptors, name)}
-            
-            # Generate 3D conformer and calculate 3D descriptors
-            mol_3d = DescriptorCalculator.generate_3d_conformer(mol)
-            descriptors_3d = DescriptorCalculator.calculate_3d_descriptors(mol_3d)
-            
-            # Combine 2D and 3D descriptors
-            all_descriptors = {**descriptors_2d, **descriptors_3d}
-            compound.set_descriptors(all_descriptors)
+
+            compound.set_descriptors(descriptors_2d)
         else:
             raise ValueError(f"Invalid SMILES: {compound.smiles}")
 
