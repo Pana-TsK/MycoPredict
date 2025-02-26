@@ -16,7 +16,7 @@ class Compound:
 
     def to_dataframe(self) -> pd.DataFrame:
         """Converts the compound data into a single-row DataFrame."""
-        data = {"SMILES": self.smiles}
+        data = {"canonical_smiles": self.smiles}
         if self.hit_miss is not None:
             data["Hit_Miss"] = self.hit_miss  # Add hit/miss column
         if self.descriptors is not None:
@@ -24,12 +24,8 @@ class Compound:
         return pd.DataFrame([data])
 
 class DescriptorCalculator:
-    descriptor_names = [
-    "MolLogP", "TPSA", "MolWt", "NumRotatableBonds",
-    "HallKierAlpha",
-    "FractionCSP3", "RingCount",
-    "NumHDonors", "NumHAcceptors"
-]
+    def __init__(self, descriptor_list : list):
+        self.descriptor_names = descriptor_list
 
     def calculate_descriptors(compound):
         """Dynamically calculates all descriptors (2D and 3D) for a given compound."""
@@ -43,7 +39,7 @@ class DescriptorCalculator:
             raise ValueError(f"Invalid SMILES: {compound.smiles}")
 
 class Dataset:
-    def __init__(self, csv_path: str, smiles_col: str, hit_miss_col: str):
+    def __init__(self, csv_path: str, smiles_col: str, descriptor_list : list, hit_miss_col: str = None):
         """
         Initializes the dataset.
         :param csv_path: Path to the CSV file.
@@ -52,22 +48,30 @@ class Dataset:
         """
         self.csv_path = csv_path
         self.smiles_col = smiles_col
-        self.hit_miss_col = hit_miss_col
+        if hit_miss_col is not None:
+            self.hit_miss_col = hit_miss_col
         self.compounds: List[Compound] = []
+        self.descriptor_list = descriptor_list
+    
+    def __repr__(self):
+        return f"Dataset with {len(self.compounds)} compounds"
 
     def load_data(self):
         """Loads the dataset from the CSV file and creates Compound objects."""
         df = pd.read_csv(self.csv_path)
         for _, row in df.iterrows():
             smiles = row[self.smiles_col]
-            hit_miss = row[self.hit_miss_col]
-            compound = Compound(smiles, hit_miss)
+            if hit_miss_col is not None:
+                hit_miss = row[self.hit_miss_col]
+                compound = Compound(smiles, hit_miss)
+            else:
+                compound = Compound(smiles)
             self.compounds.append(compound)
 
     def calculate_descriptors(self):
         """Calculates descriptors for all compounds in the dataset."""
         for compound in self.compounds:
-            DescriptorCalculator.calculate_descriptors(compound)
+            DescriptorCalculator(self.descriptor_list).calculate_descriptors(compound)
 
     def to_dataframe(self) -> pd.DataFrame:
         """Converts the dataset into a DataFrame."""
@@ -93,4 +97,4 @@ if __name__ == "__main__":
     print(df.head())
 
     # Save to descriptors file:
-    df.to_csv(r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\descriptors\05_descriptors_V2.csv", index=False)
+    df.to_csv(r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\training_data\descriptors\06_testdescriptors.csv", index=False)

@@ -21,4 +21,5 @@ df = df[df['units'] == '%']
 df = df[df['value'].notnull()]
 
 # turn this val_data into a csv file with only the necessary columns
-df[['canonical_smiles', 'value', 'units']].to_csv(r'C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\validation_data\val_dataset')
+df[['canonical_smiles', 'value']].to_csv(r'C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\data\validation_data\val_dataset.csv')
+
