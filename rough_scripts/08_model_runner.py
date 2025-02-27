@@ -13,4 +13,6 @@ dataset_path = r"C:\Users\panag\OneDrive\Documents\coding\Projects\MycoPredict\d
 df = pd.read_csv(dataset_path)
 print(df.shape)
 
+# I gave up as this code needs to be reworked
+
 
