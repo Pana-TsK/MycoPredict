@@ -1,6 +1,0 @@
-chemprop==2.1.1
-lightning==2.5.0.post0
-numpy==2.2.4
-pandas==2.2.3
-setuptools==75.8.0
-torch==2.5.1
